@@ -1,5 +1,6 @@
 import { SVG, extend as SVGextend, Element as SVGElement } from '@svgdotjs/svg.js'
 import { useState } from 'react';
+import Image from "next/image";
 
 import { ParagraphProps } from '../models/props';
 
@@ -21,11 +22,19 @@ export function ImageParagraph ({paragraph, show}: ParagraphProps): JSX.Element 
   }
 
   if (show || isShow){
-    return <article id="modal" className='show modal-preview' onClick={generateSVG}>
-      <button onClick={handleIsShow}>x</button>
+    return <article id="modal" className='show modal-preview' onAnimationStart={generateSVG}>
+      <div className="exit-modal">
+        <button className='btn btn-icon btn-red' onClick={handleIsShow}>
+          <Image src={`/exit.svg`} alt="Icono de cerrar" width={16} height={16} />
+        </button>
+      </div>
     </article>
   }
   else {
-    return <button className='btn btn-icon' onClick={handleIsShow}>Ver</button>
+    return (
+      <button className='btn btn-icon' onClick={handleIsShow}>
+        <Image src={`/preview.svg`} alt="Icono de vista previa" width={22} height={22} />
+      </button>
+    )
   }
 }
