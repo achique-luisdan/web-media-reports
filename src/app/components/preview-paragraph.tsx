@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { ParagraphProps } from '../models/props';
 
-export function ImageParagraph ({paragraph, show}: ParagraphProps): JSX.Element {
+export function PreviewParagraph ({paragraph, show}: ParagraphProps): JSX.Element {
   const [isShow, setIsShow]  = useState<boolean>(false);
   function handleIsShow(): void {
     setIsShow(!isShow);

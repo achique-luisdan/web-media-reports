@@ -1,6 +1,9 @@
+import { SVG, extend as SVGextend, Element as SVGElement } from '@svgdotjs/svg.js'
+
 export class Paragraph {
   id!: string;
   text!: string;
+  img!: string;
 
   resizeLines(): string[] {
     const resize: string [] = this.text.split(' ');
@@ -23,4 +26,17 @@ export class Paragraph {
     });
     return newLines;
   }
+
+  generateSVG (): string {
+    var draw = SVG().addTo('body').size(640, 360)
+    const lines: string [] = this.resizeLines();
+    var text = draw.text(function(add) {
+      lines.forEach (line => {
+        add.tspan(line).newLine()
+      })
+    })
+    text.move(20,20).font({ fill: 'black', family: 'Arial', size: '20' })
+    return draw.node.outerHTML
+  }
+
 }

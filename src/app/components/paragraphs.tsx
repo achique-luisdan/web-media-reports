@@ -1,11 +1,12 @@
 import { ParagraphsProps } from "../models/props";
-import { ImageParagraph } from "./image-paragraph";
+import { PreviewParagraph } from "./preview-paragraph";
 import Image from "next/image";
 import React, {MouseEvent, useEffect, useState } from 'react';
 import { Paragraph } from "../models/paragraph";
 
 export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
   const [paragraphsList, setParagraphsList]  = useState<Paragraph[]>([]);
+  const [video, setVideo]  = useState<any>();
 
   useEffect(() => {
     setParagraphsList(paragraphs);
@@ -19,10 +20,29 @@ export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
     }
   }
 
+  const getVideo = async () => {
+    const url = 'http://localhost:5000/generate';
+    let paragraphsSending = paragraphs;
+    paragraphsSending.map (paragraph => {
+      paragraph.img = paragraph.generateSVG()
+      return paragraph;
+    })
+    const res = await fetch(url, {method: "POST", body: JSON.stringify (paragraphsSending)})
+    const blob = await res.blob();
+    setVideo(URL.createObjectURL(blob))
+    return res.body;
+  }
+
   if (paragraphsList.length > 0){
     return (
       <section className="box-paragraphs">
-        <h2>Párrafos</h2>
+        <video src={video} controls>
+        </video>
+        <h2>Párrafos
+          <button  type="button" className='btn btn-icon' onClick={getVideo}>
+            <Image src={`/preview.svg`} alt="Icono de reproducir vídeo" width={20} height={20} />
+          </button>
+        </h2>
         <ul className="paragraphs">
           {
             paragraphsList.map ((paragraph) => (
@@ -31,7 +51,7 @@ export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
                   {paragraph.text}
                 </p>
                 <div className="actions-of-paragraph">
-                  <ImageParagraph paragraph={paragraph} show={false}></ImageParagraph>
+                  <PreviewParagraph paragraph={paragraph} show={false}></PreviewParagraph>
                   <button  type="button" accessKey={paragraph.id} className='btn btn-icon btn-red' onClick={handleDelete}>
                     <Image  accessKey={paragraph.id} src={`/delete.svg`} alt="Icono de eliminar" width={20} height={20} />
                   </button>
