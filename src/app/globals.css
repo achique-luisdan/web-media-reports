@@ -167,6 +167,7 @@ div.exit-modal {
 video {
   width: 90%;
   margin: auto;
+  margin-top: 8px;
 }
 
 @-webkit-keyframes fadein {
@@ -201,12 +202,7 @@ div.actions-video {
   padding-top: 2%;
 }
 
-section.box-paragraphs > hr {
-  width: 90%;
-  text-align: center;
-  justify-content: center;
-  margin: auto;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  color: var(--surface);
+h3 {
+  padding-top: 2%;
+  padding-bottom: 4%;
 }

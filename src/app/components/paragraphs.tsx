@@ -36,7 +36,11 @@ export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
       return paragraph;
     })
     paragraphsSending.push(paragraphsSending[0].generateEnding());
-    const res = await fetch(url, {method: "POST", body: JSON.stringify (paragraphsSending)})
+    let req = {
+      paragraphs: paragraphsSending,
+      code: paragraphsSending[0].generateCode()
+    }
+    const res = await fetch(url, {method: "POST", body: JSON.stringify (req)})
     const blob = await res.blob();
     setVideo(URL.createObjectURL(blob))
     setGenerated(true)
@@ -76,7 +80,6 @@ export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
         </div>
         { isGenerated &&
           <>
-            <hr />
             <video src={video} controls>
             </video>
           </>

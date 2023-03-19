@@ -69,4 +69,8 @@ export class Paragraph {
     return paragraphEnd;
   }
 
+  generateCode (): string {
+    return uuidv4().slice(0, 10);
+  }
+
 }
