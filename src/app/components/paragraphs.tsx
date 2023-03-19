@@ -7,6 +7,7 @@ import { Paragraph } from "../models/paragraph";
 export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
   const [paragraphsList, setParagraphsList]  = useState<Paragraph[]>([]);
   const [video, setVideo]  = useState<any>();
+  const [isGenerated, setGenerated]  = useState<boolean>(false);
 
   useEffect(() => {
     setParagraphsList(paragraphs);
@@ -17,6 +18,7 @@ export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
     const index = paragraphsList.findIndex (paragraph => paragraph.id === event.currentTarget.accessKey)
     if (index !== -1) {
       setParagraphsList(paragraphsList.splice(index, 1));
+      getVideo();
     }
   }
 
@@ -30,19 +32,27 @@ export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
     const res = await fetch(url, {method: "POST", body: JSON.stringify (paragraphsSending)})
     const blob = await res.blob();
     setVideo(URL.createObjectURL(blob))
+    setGenerated(true)
     return res.body;
   }
 
   if (paragraphsList.length > 0){
     return (
       <section className="box-paragraphs">
-        <video src={video} controls>
-        </video>
-        <h2>Párrafos
-          <button  type="button" className='btn btn-icon' onClick={getVideo}>
-            <Image src={`/preview.svg`} alt="Icono de reproducir vídeo" width={20} height={20} />
+        <h2>Vídeo</h2>
+        <div className="actions-video">
+          <button  type="button" className='btn btn-icon btn-success' onClick={getVideo}>
+            <Image src={`/play.svg`} alt="Icono de reproducir vídeo" width={20} height={20} />
           </button>
-        </h2>
+        </div>
+        { isGenerated &&
+          <>
+            <hr />
+            <video src={video} controls>
+            </video>
+          </>
+        }
+        <h2>Párrafos</h2>
         <ul className="paragraphs">
           {
             paragraphsList.map ((paragraph) => (
@@ -52,8 +62,8 @@ export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
                 </p>
                 <div className="actions-of-paragraph">
                   <PreviewParagraph paragraph={paragraph} show={false}></PreviewParagraph>
-                  <button  type="button" accessKey={paragraph.id} className='btn btn-icon btn-red' onClick={handleDelete}>
-                    <Image  accessKey={paragraph.id} src={`/delete.svg`} alt="Icono de eliminar" width={20} height={20} />
+                  <button type="button" accessKey={paragraph.id} className='btn btn-icon btn-red' onClick={handleDelete}>
+                    <Image accessKey={paragraph.id} src={`/delete.svg`} alt="Icono de eliminar" width={20} height={20} />
                   </button>
                 </div>
               </li>

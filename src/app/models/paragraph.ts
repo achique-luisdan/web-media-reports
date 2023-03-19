@@ -36,6 +36,7 @@ export class Paragraph {
       })
     })
     text.move(20,20).font({ fill: 'black', family: 'Arial', size: '20' })
+    draw.remove();
     return draw.node.outerHTML
   }
 

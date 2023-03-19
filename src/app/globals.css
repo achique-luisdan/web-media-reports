@@ -10,6 +10,7 @@
   --surface: #eee2ff;
   --black: #461f7a;
   --red: #dc3545;
+  --success: #28A745;
 }
 body {
   font-family: var(--font-primary);
@@ -64,6 +65,10 @@ button.btn-clear-text-report {
   border: var(--surface) solid 1px;
   background-color: var(--surface);
   color: black;
+}
+button.btn-success {
+  border: var(--surface) solid 1px;
+  background-color: var(--success);
 }
 button.btn:hover {
   opacity: 0.8;
@@ -188,4 +193,21 @@ video {
   background-color: var(--primary);
   border-radius: 10px;
   border: 5px;
+}
+
+div.actions-video {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 2%;
+}
+
+section.box-paragraphs > hr {
+  width: 90%;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  color: var(--surface);
 }
