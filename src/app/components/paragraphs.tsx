@@ -18,7 +18,6 @@ export function Paragraphs({paragraphs}: ParagraphsProps): JSX.Element {
     const index = paragraphsList.findIndex (paragraph => paragraph.id === event.currentTarget.accessKey)
     if (index !== -1) {
       setParagraphsList(paragraphsList.splice(index, 1));
-      getVideo();
     }
   }
 

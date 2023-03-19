@@ -1,4 +1,4 @@
-import { SVG, extend as SVGextend, Element as SVGElement } from '@svgdotjs/svg.js'
+import { SVG } from '@svgdotjs/svg.js'
 
 export class Paragraph {
   id!: string;
@@ -35,7 +35,7 @@ export class Paragraph {
         add.tspan(line).newLine()
       })
     })
-    text.move(20,20).font({ fill: 'black', family: 'Arial', size: '20' })
+    text.move(20,20).font({ fill: 'black', family: 'Arial', size: '26' })
     draw.remove();
     return draw.node.outerHTML
   }
