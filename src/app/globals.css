@@ -161,8 +161,7 @@ div.exit-modal {
 }
 
 #modal > svg {
-  width: 100%;
-  aspect-ratio: contain;
+  width: min-content
 }
 
 video {

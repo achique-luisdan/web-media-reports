@@ -1,4 +1,3 @@
-import { SVG, extend as SVGextend, Element as SVGElement } from '@svgdotjs/svg.js'
 import { useState } from 'react';
 import Image from "next/image";
 
@@ -11,14 +10,7 @@ export function PreviewParagraph ({paragraph, show}: ParagraphProps): JSX.Elemen
   }
 
   function generateSVG (): void {
-    var draw = SVG().addTo('article').size(640, 360)
-    const lines: string [] = paragraph.resizeLines();
-    var text = draw.text(function(add) {
-      lines.forEach (line => {
-        add.tspan(line).newLine()
-      })
-    })
-    text.move(20,20).font({ fill: 'black', family: 'Arial', size: '20' })
+    paragraph.generateSVG(true);
   }
 
   if (show || isShow){

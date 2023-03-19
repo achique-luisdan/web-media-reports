@@ -6,13 +6,15 @@ Generador de vídeos de reportes.
 
 ## Características (Features) ✨
 
-1. Desglosa textos del reporte en párrafos de máximo ***n*** caracteres.
+✅ Desglosa textos del reporte en párrafos de máximo ***n*** caracteres.
 
-2. Genera secuencia de imágenes de frases del reporte.
+✅ Genera secuencia de imágenes de frases del reporte.
 
-3. Vista previa de video del reporte.
+✅ Vista previa de video del reporte.
 
-4. Agrega fondo musical al vídeo del reporte.
+✅ Personalizar color del fondo y color de la letra.
+
+🕥 Agrega fondo musical al vídeo del reporte.
 
 ## Herramientas (Tools) 🛠️
 
